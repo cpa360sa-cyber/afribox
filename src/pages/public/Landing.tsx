@@ -3,6 +3,7 @@ import { Hero } from '../../components/landing/Hero'
 import { ProblemBar } from '../../components/landing/ProblemBar'
 import { SolutionOverview } from '../../components/landing/SolutionOverview'
 import { Features } from '../../components/landing/Features'
+import { BuiltForSA } from '../../components/landing/BuiltForSA'
 import { Stats } from '../../components/landing/Stats'
 import { PricingSection } from '../../components/landing/PricingSection'
 import { HowItWorks } from '../../components/landing/HowItWorks'
@@ -16,6 +17,7 @@ export default function Landing() {
       <ProblemBar />
       <SolutionOverview />
       <Features />
+      <BuiltForSA />
       <Stats />
       <PricingSection />
       <HowItWorks />

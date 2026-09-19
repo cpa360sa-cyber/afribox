@@ -12,7 +12,7 @@ import { formatZAR, formatDate, cn } from '../../lib/utils'
 export default function Billing() {
   const { appUser } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
-  const plan = getPlan(appUser?.planId ?? 'starter')
+  const plan = getPlan(appUser?.planId ?? 'starterbot')
   const nextBillingDate = Date.now() + 30 * 24 * 60 * 60 * 1000
 
   return (
@@ -46,7 +46,7 @@ export default function Billing() {
               <Check className="text-emerald" size={20} />
               <div>
                 <p className="text-xs text-midgray">Payment method</p>
-                <p className="font-semibold text-textdark">Yoco — not yet connected</p>
+                <p className="font-semibold text-textdark">Paystack / Yoco / SnapScan — not yet connected</p>
               </div>
             </div>
           </div>

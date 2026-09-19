@@ -18,7 +18,7 @@ export default function AdminAnalytics() {
   }, [businesses])
 
   const agentTypeData = useMemo(() => {
-    const counts: Record<string, number> = { chatbot: 0, salesbot: 0, voice: 0, workflow: 0 }
+    const counts: Record<string, number> = { salesbot: 0, adminbot: 0, brandbot: 0 }
     agents.forEach((a) => {
       counts[a.type] = (counts[a.type] ?? 0) + 1
     })

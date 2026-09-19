@@ -1,10 +1,9 @@
-import { MessageCircle, Target, Phone, Workflow } from 'lucide-react'
+import { MessageCircle, CalendarClock, Palette } from 'lucide-react'
 
 const agents = [
-  { icon: MessageCircle, label: 'ChatBot', angle: -135 },
-  { icon: Target, label: 'SalesBot', angle: -45 },
-  { icon: Phone, label: 'Voice AI', angle: 45 },
-  { icon: Workflow, label: 'Workflows', angle: 135 },
+  { icon: MessageCircle, label: 'SalesBot', angle: -90 },
+  { icon: CalendarClock, label: 'AdminBot', angle: 30 },
+  { icon: Palette, label: 'BrandBot', angle: 150 },
 ]
 
 export function SolutionOverview() {
@@ -14,10 +13,10 @@ export function SolutionOverview() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="section-eyebrow">The Platform</span>
           <h2 className="mt-3 font-display text-3xl font-extrabold text-textdark sm:text-4xl">
-            One hub. Four AI employees.
+            One hub. Three AI employees.
           </h2>
           <p className="mt-4 text-lg text-midgray">
-            AfriBox is the command center for your AI workforce — configure once, and each agent works
+            AfriBox is the command center for your AI workforce — configure once, and each bot works
             around the clock in your business's voice.
           </p>
         </div>

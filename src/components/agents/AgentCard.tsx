@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { MessageCircle, Target, Phone, Workflow, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { Card } from '../ui/Card'
 import { Badge } from '../ui/Badge'
 import type { Agent } from '../../types'
 import { cn } from '../../lib/utils'
-
-const icons = { chatbot: MessageCircle, salesbot: Target, voice: Phone, workflow: Workflow }
+import { agentIcons } from './agentIcons'
 
 interface Props {
   agent: Agent
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export function AgentCard({ agent, onToggle }: Props) {
-  const Icon = icons[agent.type]
+  const Icon = agentIcons[agent.type]
 
   return (
     <Card className="flex flex-col">

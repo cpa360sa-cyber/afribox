@@ -8,6 +8,10 @@ import {
   CreditCard,
   Settings,
   ShieldCheck,
+  Palette,
+  ScanSearch,
+  CalendarClock,
+  Mic,
 } from 'lucide-react'
 import { Logo } from './Logo'
 import { useAuth } from '../../hooks/useAuth'
@@ -16,6 +20,10 @@ import { cn } from '../../lib/utils'
 const clientLinks = [
   { to: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/app/agents', label: 'Agents', icon: Bot },
+  { to: '/app/voice', label: 'Voice Commands', icon: Mic },
+  { to: '/app/brandbox', label: 'BrandBox', icon: Palette },
+  { to: '/app/aiscan', label: 'AiScan', icon: ScanSearch },
+  { to: '/app/bookings', label: 'Bookings', icon: CalendarClock },
   { to: '/app/inbox', label: 'Inbox', icon: Inbox },
   { to: '/app/leads', label: 'Leads', icon: Target },
   { to: '/app/analytics', label: 'Analytics', icon: BarChart3 },

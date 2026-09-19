@@ -34,15 +34,15 @@ export interface Business {
 
 export type AgentTone = 'formal' | 'friendly' | 'casual'
 export type AgentLanguage = 'English' | 'Zulu' | 'Sotho' | 'Afrikaans'
-export type AgentType = 'chatbot' | 'salesbot' | 'voice' | 'workflow'
+export type AgentType = 'salesbot' | 'adminbot' | 'brandbot'
 export type AgentStatus = 'active' | 'paused'
 
 export interface AgentConfig {
+  whatsappNumber?: string
+  facebookPageUrl?: string
   webhookUrl?: string
-  phoneNumber?: string
-  voicePersona?: string
   qualifyingQuestions?: string[]
-  automations?: WorkflowAutomation[]
+  reminderLeadTimeHours?: number
 }
 
 export interface Agent {
@@ -111,15 +111,6 @@ export interface Subscription {
   nextBillingDate: number
 }
 
-export interface WorkflowAutomation {
-  id: string
-  templateId: string
-  name: string
-  status: 'active' | 'paused'
-  lastRunAt?: number
-  runCount: number
-}
-
 export interface AgentTemplate {
   type: AgentType
   name: string
@@ -128,9 +119,46 @@ export interface AgentTemplate {
   icon: string
 }
 
-export interface WorkflowTemplate {
+export type BookingStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled'
+export type PaymentProvider = 'paystack' | 'yoco' | 'snapscan'
+export type PaymentStatus = 'unpaid' | 'paid' | 'refunded'
+
+export interface Booking {
   id: string
-  name: string
-  description: string
-  icon: string
+  businessId: string
+  customerName: string
+  customerPhone: string
+  service: string
+  scheduledAt: number
+  status: BookingStatus
+  paymentProvider: PaymentProvider | null
+  paymentStatus: PaymentStatus
+  amountZAR: number | null
+  createdAt: number
+}
+
+export type BrandAssetType = 'logo' | 'bio' | 'slogan'
+
+export interface BrandAsset {
+  id: string
+  businessId: string
+  assetType: BrandAssetType
+  content: string
+  meta: Record<string, unknown>
+  createdAt: number
+}
+
+export interface ScanFinding {
+  area: string
+  issue: string
+  recommendation: string
+}
+
+export interface ScanReport {
+  id: string
+  businessId: string
+  inputs: { website?: string; facebook?: string; instagram?: string }
+  score: number | null
+  findings: ScanFinding[]
+  createdAt: number
 }

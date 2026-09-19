@@ -1,4 +1,4 @@
-import type { Agent, AppUser, Business, Conversation, Lead } from '../types'
+import type { Agent, AppUser, Booking, BrandAsset, Business, Conversation, Lead, ScanReport } from '../types'
 
 export function rowToAppUser(row: any): AppUser {
   return {
@@ -69,5 +69,43 @@ export function rowToLead(row: any): Lead {
     queryType: row.query_type ?? 'general',
     createdAt: new Date(row.created_at).getTime(),
     status: row.status,
+  }
+}
+
+export function rowToBooking(row: any): Booking {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    customerName: row.customer_name,
+    customerPhone: row.customer_phone ?? '',
+    service: row.service ?? '',
+    scheduledAt: new Date(row.scheduled_at).getTime(),
+    status: row.status,
+    paymentProvider: row.payment_provider,
+    paymentStatus: row.payment_status,
+    amountZAR: row.amount_zar,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToBrandAsset(row: any): BrandAsset {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    assetType: row.asset_type,
+    content: row.content,
+    meta: row.meta ?? {},
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToScanReport(row: any): ScanReport {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    inputs: row.inputs ?? {},
+    score: row.score,
+    findings: row.findings ?? [],
+    createdAt: new Date(row.created_at).getTime(),
   }
 }

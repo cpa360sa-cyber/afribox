@@ -12,6 +12,7 @@ import { Badge } from '../../components/ui/Badge'
 import { useAuth } from '../../hooks/useAuth'
 import { supabase } from '../../lib/supabase'
 import { agentTemplate } from '../../constants/agentTemplates'
+import { getPlan } from '../../constants/plans'
 import type { AgentLanguage, AgentTone, AgentType } from '../../types'
 
 const initialProfile: BusinessProfileData = {
@@ -100,7 +101,7 @@ export default function Onboarding() {
       <div className="container-page max-w-3xl">
         <div className="mb-8 flex items-center justify-between">
           <Logo />
-          <Badge tone="gold">{appUser?.planId ?? 'starter'} plan</Badge>
+          <Badge tone="gold">{getPlan(appUser?.planId ?? 'starterbot').name} plan</Badge>
         </div>
 
         <div className="card-surface p-8 sm:p-10">
@@ -120,7 +121,7 @@ export default function Onboarding() {
 
           {step === 3 && (
             <WizardStep title="Choose your AI agents" subtitle="Pick which AI employees to deploy first.">
-              <AgentSelector planId={appUser?.planId ?? 'starter'} selected={agentTypes} onChange={setAgentTypes} />
+              <AgentSelector planId={appUser?.planId ?? 'starterbot'} selected={agentTypes} onChange={setAgentTypes} />
             </WizardStep>
           )}
 

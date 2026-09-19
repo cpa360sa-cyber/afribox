@@ -167,7 +167,7 @@ export default function Settings() {
             </Button>
           </CardHeader>
           <div className="space-y-4">
-            {faqs.length === 0 && <p className="text-sm text-midgray">No FAQs yet — add some to train your ChatBot Agent.</p>}
+            {faqs.length === 0 && <p className="text-sm text-midgray">No FAQs yet — add some to train your SalesBot.</p>}
             {faqs.map((faq, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-black/5 p-4">
                 <div className="flex-1 space-y-2">

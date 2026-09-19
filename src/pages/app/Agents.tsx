@@ -19,7 +19,7 @@ export default function Agents() {
   const [modalOpen, setModalOpen] = useState(false)
   const [creating, setCreating] = useState(false)
 
-  const plan = getPlan(appUser?.planId ?? 'starter')
+  const plan = getPlan(appUser?.planId ?? 'starterbot')
   const limit = plan.agentLimit === 'unlimited' ? Infinity : plan.agentLimit
   const atLimit = agents.length >= limit
   const availableTemplates = AGENT_TEMPLATES.filter((t) => !agents.some((a) => a.type === t.type))

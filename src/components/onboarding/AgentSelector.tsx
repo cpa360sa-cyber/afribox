@@ -1,15 +1,9 @@
-import { Check, MessageCircle, Target, Phone, Workflow } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { AGENT_TEMPLATES } from '../../constants/agentTemplates'
 import { getPlan } from '../../constants/plans'
 import { cn } from '../../lib/utils'
 import type { AgentType } from '../../types'
-
-const icons: Record<string, typeof MessageCircle> = {
-  MessageCircle,
-  Target,
-  Phone,
-  Workflow,
-}
+import { agentIcons } from '../agents/agentIcons'
 
 interface Props {
   planId: string
@@ -38,7 +32,7 @@ export function AgentSelector({ planId, selected, onChange }: Props) {
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {AGENT_TEMPLATES.map((agent) => {
-          const Icon = icons[agent.icon]
+          const Icon = agentIcons[agent.type]
           const active = selected.includes(agent.type)
           const disabled = !active && selected.length >= limit
           return (

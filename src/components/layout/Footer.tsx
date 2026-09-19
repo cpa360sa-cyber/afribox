@@ -37,7 +37,7 @@ export function Footer() {
         <div className="col-span-2">
           <Logo dark />
           <p className="mt-4 max-w-xs text-sm">
-            AI Employees for African Business. Built by Etaerc AI Agency, Pretoria, South Africa.
+            AI Platform for South African Startups. Built by Etaerc AI Agency, Pretoria, South Africa.
           </p>
           <div className="mt-6 flex gap-4">
             {socials.map((platform) => (

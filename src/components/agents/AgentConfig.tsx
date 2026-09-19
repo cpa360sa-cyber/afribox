@@ -27,66 +27,77 @@ export function AgentConfig({ agent, onSave }: Props) {
 
   return (
     <div className="space-y-5">
-      {agent.type === 'voice' && (
+      {agent.type === 'salesbot' && (
         <>
-          <div className="rounded-xl bg-gold/10 px-4 py-3 text-sm text-[#8a6f1f]">
-            Voice AI is coming soon. Fill in your details below and we'll activate your agent as soon as Vapi
-            integration goes live.
+          <Input
+            label="WhatsApp Business number"
+            placeholder="+27 82 000 0000"
+            value={config.whatsappNumber ?? ''}
+            onChange={(e) => setConfig({ ...config, whatsappNumber: e.target.value })}
+          />
+          <Input
+            label="Facebook Page URL"
+            placeholder="https://facebook.com/yourbusiness"
+            value={config.facebookPageUrl ?? ''}
+            onChange={(e) => setConfig({ ...config, facebookPageUrl: e.target.value })}
+          />
+          <div>
+            <label className="mb-1.5 block text-sm font-semibold text-textdark">
+              Qualifying questions (one per line)
+            </label>
+            <textarea
+              rows={4}
+              value={(config.qualifyingQuestions ?? []).join('\n')}
+              onChange={(e) =>
+                setConfig({ ...config, qualifyingQuestions: e.target.value.split('\n').filter(Boolean) })
+              }
+              className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-textdark focus:border-emerald focus:outline-none focus:ring-2 focus:ring-emerald/30"
+              placeholder={'What service are you interested in?\nWhat is your budget range?'}
+            />
           </div>
-          <Input
-            label="Vapi Webhook URL"
-            placeholder="https://api.vapi.ai/webhook/…"
-            value={config.webhookUrl ?? ''}
-            onChange={(e) => setConfig({ ...config, webhookUrl: e.target.value })}
-          />
-          <Input
-            label="Business phone number"
-            placeholder="+27 12 345 6789"
-            value={config.phoneNumber ?? ''}
-            onChange={(e) => setConfig({ ...config, phoneNumber: e.target.value })}
-          />
-          <Input
-            label="Voice persona"
-            placeholder="e.g. Warm, professional female voice"
-            value={config.voicePersona ?? ''}
-            onChange={(e) => setConfig({ ...config, voicePersona: e.target.value })}
-          />
+          <p className="text-sm text-midgray">
+            This agent uses your Business Profile FAQs and tone settings from{' '}
+            <a href="/app/settings" className="font-semibold text-emerald hover:underline">
+              Settings
+            </a>
+            . Update them there to change how {agent.name} responds.
+          </p>
         </>
       )}
 
-      {agent.type === 'workflow' && (
-        <Input
-          label="Webhook URL (n8n / Zapier / Make)"
-          placeholder="https://hooks.zapier.com/…"
-          value={config.webhookUrl ?? ''}
-          onChange={(e) => setConfig({ ...config, webhookUrl: e.target.value })}
-        />
-      )}
-
-      {agent.type === 'salesbot' && (
-        <div>
-          <label className="mb-1.5 block text-sm font-semibold text-textdark">
-            Qualifying questions (one per line)
-          </label>
-          <textarea
-            rows={4}
-            value={(config.qualifyingQuestions ?? []).join('\n')}
-            onChange={(e) =>
-              setConfig({ ...config, qualifyingQuestions: e.target.value.split('\n').filter(Boolean) })
-            }
-            className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-textdark focus:border-emerald focus:outline-none focus:ring-2 focus:ring-emerald/30"
-            placeholder={'What service are you interested in?\nWhat is your budget range?'}
+      {agent.type === 'adminbot' && (
+        <>
+          <Input
+            label="Reminder lead time (hours before booking)"
+            type="number"
+            min={1}
+            placeholder="24"
+            value={config.reminderLeadTimeHours ?? ''}
+            onChange={(e) => setConfig({ ...config, reminderLeadTimeHours: Number(e.target.value) })}
           />
-        </div>
+          <Input
+            label="Calendar sync webhook (optional)"
+            placeholder="https://hooks.zapier.com/…"
+            value={config.webhookUrl ?? ''}
+            onChange={(e) => setConfig({ ...config, webhookUrl: e.target.value })}
+          />
+          <p className="text-sm text-midgray">
+            {agent.name} tracks bookings, sends reminders, and follows up on invoices — manage bookings on the{' '}
+            <a href="/app/bookings" className="font-semibold text-emerald hover:underline">
+              Bookings
+            </a>{' '}
+            page.
+          </p>
+        </>
       )}
 
-      {agent.type === 'chatbot' && (
+      {agent.type === 'brandbot' && (
         <p className="text-sm text-midgray">
-          This agent uses your Business Profile FAQs and tone settings from{' '}
-          <a href="/app/settings" className="font-semibold text-emerald hover:underline">
-            Settings
+          {agent.name} keeps your branding consistent using assets generated in{' '}
+          <a href="/app/brandbox" className="font-semibold text-emerald hover:underline">
+            BrandBox
           </a>
-          . Update them there to change how {agent.name} responds.
+          . Generate a logo, bio, or slogan there and {agent.name} will keep your profile aligned with it.
         </p>
       )}
 

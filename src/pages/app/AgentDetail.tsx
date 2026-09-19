@@ -1,17 +1,16 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { ArrowLeft, MessageCircle, Target, Phone, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CalendarClock, Palette } from 'lucide-react'
 import { AppShell } from '../../components/layout/AppShell'
 import { ConversationWindow } from '../../components/agents/ConversationWindow'
 import { LeadForm } from '../../components/agents/LeadForm'
 import { AgentConfig } from '../../components/agents/AgentConfig'
+import { agentIcons } from '../../components/agents/agentIcons'
 import { Card, CardHeader, CardTitle } from '../../components/ui/Card'
 import { Badge } from '../../components/ui/Badge'
 import { useBusiness } from '../../hooks/useBusiness'
 import { useAgents } from '../../hooks/useAgents'
 import { useLeads } from '../../hooks/useLeads'
 import { useConversations } from '../../hooks/useConversations'
-
-const icons = { chatbot: MessageCircle, salesbot: Target, voice: Phone, workflow: Workflow }
 
 export default function AgentDetail() {
   const { id } = useParams<{ id: string }>()
@@ -33,7 +32,7 @@ export default function AgentDetail() {
     )
   }
 
-  const Icon = icons[agent.type]
+  const Icon = agentIcons[agent.type]
 
   return (
     <AppShell title={agent.name}>
@@ -63,7 +62,7 @@ export default function AgentDetail() {
           <AgentConfig agent={agent} onSave={(config) => updateAgentConfig(agent.id, config)} />
         </Card>
 
-        {agent.type === 'chatbot' && (
+        {agent.type === 'salesbot' && (
           <div>
             <h3 className="mb-3 font-display text-lg font-bold text-textdark">Test Conversation</h3>
             <ConversationWindow
@@ -71,26 +70,51 @@ export default function AgentDetail() {
               business={business}
               onConversationEnd={(messages) => createConversation(agent.id, business.id, messages)}
             />
+            <Card className="mt-4">
+              <CardHeader>
+                <CardTitle>Manual Lead Entry</CardTitle>
+              </CardHeader>
+              <LeadForm
+                onSubmit={(data) =>
+                  createLead({
+                    agentId: agent.id,
+                    businessId: business.id,
+                    name: data.name,
+                    phone: data.phone,
+                    email: data.email,
+                    queryType: data.queryType,
+                  })
+                }
+              />
+            </Card>
           </div>
         )}
 
-        {agent.type === 'salesbot' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Test Lead Capture</CardTitle>
-            </CardHeader>
-            <LeadForm
-              onSubmit={(data) =>
-                createLead({
-                  agentId: agent.id,
-                  businessId: business.id,
-                  name: data.name,
-                  phone: data.phone,
-                  email: data.email,
-                  queryType: data.queryType,
-                })
-              }
-            />
+        {agent.type === 'adminbot' && (
+          <Card className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+            <CalendarClock className="text-emerald" size={36} />
+            <p className="font-semibold text-textdark">AdminBot manages bookings and reminders</p>
+            <p className="max-w-xs text-sm text-midgray">
+              See and manage everything this agent is tracking on the Bookings page.
+            </p>
+            <Link to="/app/bookings" className="btn-primary mt-1 text-sm">
+              Go to Bookings
+              <ArrowRight size={14} />
+            </Link>
+          </Card>
+        )}
+
+        {agent.type === 'brandbot' && (
+          <Card className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+            <Palette className="text-emerald" size={36} />
+            <p className="font-semibold text-textdark">BrandBot keeps your branding consistent</p>
+            <p className="max-w-xs text-sm text-midgray">
+              Generate and manage your logo, bio, and slogans in BrandBox.
+            </p>
+            <Link to="/app/brandbox" className="btn-primary mt-1 text-sm">
+              Open BrandBox
+              <ArrowRight size={14} />
+            </Link>
           </Card>
         )}
       </div>

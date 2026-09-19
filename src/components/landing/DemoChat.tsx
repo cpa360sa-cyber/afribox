@@ -26,7 +26,7 @@ const demoBusiness: Business = {
 const demoAgent: Agent = {
   id: 'demo-agent',
   businessId: 'demo',
-  type: 'chatbot',
+  type: 'salesbot',
   name: 'Thandi',
   role: 'Friendly customer support assistant helping shoppers with orders, delivery and products.',
   status: 'active',

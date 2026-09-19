@@ -1,6 +1,6 @@
 # AfriBox
 
-AI Employees for African Business — a Supabase-powered SaaS platform by **Etaerc AI Agency** that deploys autonomous AI agents (ChatBot, SalesBot, Voice AI, Workflow Automation) for South African SMEs.
+AI Platform for South African Startups — a Supabase-powered SaaS platform by **Etaerc AI Agency**. AfriBox is a digital co-founder: three AI employees (SalesBot, AdminBot, BrandBot) plus BrandBox, AiScan, a browser-based Voice Command Center, Bookings & Payments (Paystack/Yoco/SnapScan), and Reports & Analytics — all in one dashboard.
 
 ## Tech Stack
 
@@ -23,7 +23,11 @@ npm run dev
 
 See `.env.example`. The Supabase project (`afribox`, org `cpa360sa`) is already created — see `.env` for its URL and anon key. You'll additionally need an Anthropic API key.
 
-> The ChatBot agent calls the Anthropic API directly from the browser using `VITE_ANTHROPIC_API_KEY`, which exposes the key in the client bundle. This is fine for a demo build — for real production traffic, proxy `src/lib/anthropic.ts` through a Supabase Edge Function so the key never ships to the browser.
+> SalesBot, BrandBox, and AiScan all call the Anthropic API directly from the browser using `VITE_ANTHROPIC_API_KEY`, which exposes the key in the client bundle. This is fine for a demo build — for real production traffic, proxy `src/lib/anthropic.ts` through a Supabase Edge Function so the key never ships to the browser.
+>
+> Voice Command Center uses the browser's built-in Web Speech API (Chrome/Edge) — no API key or third-party service required.
+>
+> Paystack/Yoco/SnapScan payment processing and real WhatsApp/Facebook message delivery are not wired up yet — Bookings and agent config capture the right data, but actually taking a payment or sending a WhatsApp message needs each provider's own API keys and a backend webhook.
 
 ## Project Structure
 

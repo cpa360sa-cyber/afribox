@@ -1,35 +1,29 @@
-import { MessageCircle, Target, Phone, Workflow, Check } from 'lucide-react'
+import { MessageCircle, CalendarClock, Palette, Check } from 'lucide-react'
 import { DemoChat } from './DemoChat'
+import { CoreModules } from './CoreModules'
 
 const features = [
   {
     icon: MessageCircle,
-    title: 'ChatBot Agent',
-    headline: 'Never miss a customer message again',
-    copy: "AfriBox's ChatBot Agent answers customer questions 24/7 across your website and WhatsApp, using your business's own FAQs, services, and tone.",
+    title: 'SalesBot',
+    headline: 'Never miss a WhatsApp or Facebook message again',
+    copy: "AfriBox's SalesBot manages WhatsApp and Facebook messages 24/7, answering in your business's own voice and capturing every lead that comes through.",
     points: ['Trained on your business knowledge', 'Escalates to a human when needed', 'Available in English, Zulu, Sotho & Afrikaans'],
     demo: true,
   },
   {
-    icon: Target,
-    title: 'SalesBot',
-    headline: 'Turn visitors into verified leads automatically',
-    copy: 'SalesBot engages every visitor, asks the right qualifying questions, and captures their details straight into your lead inbox — no manual follow-up required.',
-    points: ['Custom qualifying questions', 'Instant owner notifications', 'Leads organised by query type'],
+    icon: CalendarClock,
+    title: 'AdminBot',
+    headline: 'The admin support you never had to hire',
+    copy: 'AdminBot handles bookings, sends reminders, and follows up on unpaid invoices via WhatsApp — so cashflow stays consistent without you chasing it.',
+    points: ['Automatic booking reminders', 'WhatsApp invoice follow-ups', 'Syncs with your calendar'],
   },
   {
-    icon: Phone,
-    title: 'Voice AI',
-    headline: "Answer calls 24/7 — even when you're asleep",
-    copy: 'A natural-sounding voice agent powered by Vapi answers your business phone line, books appointments, and routes urgent calls to you.',
-    points: ['Custom voice persona', 'Works on your existing number', 'Coming soon — join the waitlist'],
-  },
-  {
-    icon: Workflow,
-    title: 'Workflow Automation',
-    headline: 'Automate the admin that drains your day',
-    copy: 'Connect AfriBox to n8n, Zapier, or Make with pre-built templates for invoice reminders, booking confirmations, and lead follow-up sequences.',
-    points: ['Pre-built automation templates', 'Visual activity log', 'One-click webhook setup'],
+    icon: Palette,
+    title: 'BrandBot',
+    headline: 'Weak branding, fixed in minutes',
+    copy: 'BrandBot works with BrandBox to instantly create logos, bios, and slogans — then keeps every customer touchpoint consistent with your brand.',
+    points: ['AI-generated logo concepts', 'Bios and slogans in seconds', 'Localised branding styles'],
   },
 ]
 
@@ -40,7 +34,7 @@ export function Features() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="section-eyebrow">Meet Your AI Workforce</span>
           <h2 className="mt-3 font-display text-3xl font-extrabold text-textdark sm:text-4xl">
-            Four agents. One mission: grow your business.
+            Three AI employees. One digital co-founder.
           </h2>
         </div>
 
@@ -70,6 +64,8 @@ export function Features() {
             </div>
           ))}
         </div>
+
+        <CoreModules />
       </div>
     </section>
   )

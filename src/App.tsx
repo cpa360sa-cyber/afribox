@@ -21,6 +21,10 @@ import Analytics from './pages/app/Analytics'
 import Leads from './pages/app/Leads'
 import Billing from './pages/app/Billing'
 import Settings from './pages/app/Settings'
+import BrandBox from './pages/app/BrandBox'
+import AiScan from './pages/app/AiScan'
+import Bookings from './pages/app/Bookings'
+import VoiceCommandCenter from './pages/app/VoiceCommandCenter'
 
 import AdminOverview from './pages/admin/AdminOverview'
 import ClientList from './pages/admin/ClientList'
@@ -125,6 +129,46 @@ export default function App() {
                 <ProtectedRoute>
                   <RequireOnboarding>
                     <Settings />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/brandbox"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <BrandBox />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/aiscan"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <AiScan />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/bookings"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <Bookings />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/voice"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <VoiceCommandCenter />
                   </RequireOnboarding>
                 </ProtectedRoute>
               }
