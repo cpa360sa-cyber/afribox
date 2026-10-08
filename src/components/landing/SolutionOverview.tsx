@@ -1,4 +1,5 @@
 import { MessageCircle, CalendarClock, Palette } from 'lucide-react'
+import { LogoMark } from '../layout/LogoMark'
 
 const agents = [
   { icon: MessageCircle, label: 'SalesBot', angle: -90 },
@@ -23,11 +24,9 @@ export function SolutionOverview() {
 
         <div className="relative mx-auto mt-16 flex h-80 max-w-md items-center justify-center sm:h-96">
           <div className="absolute h-64 w-64 rounded-full border-2 border-dashed border-emerald/25 sm:h-80 sm:w-80" />
-          <div className="relative z-10 flex h-28 w-28 flex-col items-center justify-center rounded-2xl bg-navy text-white shadow-glow sm:h-32 sm:w-32">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald text-sm font-extrabold">
-              AB
-            </span>
-            <span className="mt-2 font-display text-sm font-bold">AfriBox</span>
+          <div className="relative z-10 flex h-28 w-28 flex-col items-center justify-center gap-2 rounded-2xl bg-navy text-white shadow-glow sm:h-32 sm:w-32">
+            <LogoMark size={40} className="rounded-[0.55rem]" />
+            <span className="font-display text-sm font-bold">AfriBox</span>
           </div>
           {agents.map((agent) => {
             const rad = (agent.angle * Math.PI) / 180

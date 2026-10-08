@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '../../lib/utils'
 
-type Variant = 'primary' | 'secondary' | 'gold' | 'ghost' | 'outline'
+type Variant = 'primary' | 'secondary' | 'gold' | 'orange' | 'ghost' | 'outline'
 type Size = 'sm' | 'md' | 'lg'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,9 +10,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-emerald text-white hover:bg-emerald-dark focus:ring-emerald',
-  secondary: 'bg-navy text-white hover:bg-navy/90 focus:ring-navy',
-  gold: 'bg-gold text-navy hover:bg-gold-light focus:ring-gold',
+  primary: 'bg-emerald text-white shadow-soft hover:-translate-y-0.5 hover:bg-emerald-dark hover:shadow-glow focus:ring-emerald',
+  secondary: 'bg-navy text-white shadow-soft hover:-translate-y-0.5 hover:bg-navy/90 focus:ring-navy',
+  gold: 'bg-gold text-navy shadow-soft hover:-translate-y-0.5 hover:bg-gold-light focus:ring-gold',
+  orange: 'bg-orange text-white shadow-soft hover:-translate-y-0.5 hover:bg-orange-dark focus:ring-orange',
   ghost: 'bg-transparent text-textdark hover:bg-black/5 focus:ring-emerald',
   outline: 'border-2 border-emerald text-emerald bg-transparent hover:bg-emerald/10 focus:ring-emerald',
 }
@@ -29,7 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
+          'inline-flex items-center justify-center gap-2 rounded-full font-bold transition focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0',
           variantClasses[variant],
           sizeClasses[size],
           className

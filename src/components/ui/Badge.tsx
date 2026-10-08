@@ -1,11 +1,12 @@
 import type { HTMLAttributes } from 'react'
 import { cn } from '../../lib/utils'
 
-type Tone = 'emerald' | 'gold' | 'navy' | 'gray' | 'red'
+type Tone = 'emerald' | 'gold' | 'orange' | 'navy' | 'gray' | 'red'
 
 const toneClasses: Record<Tone, string> = {
   emerald: 'bg-emerald/10 text-emerald-dark',
   gold: 'bg-gold/15 text-[#8a6f1f]',
+  orange: 'bg-orange/12 text-orange-dark',
   navy: 'bg-navy/10 text-navy',
   gray: 'bg-midgray/15 text-midgray',
   red: 'bg-red-100 text-red-700',

@@ -1,7 +1,7 @@
 import type { Agent, Business, Message } from '../types'
 
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages'
-const MODEL = 'claude-sonnet-4-6'
+const MODEL = 'claude-sonnet-5'
 
 function buildSystemPrompt(agent: Agent, business: Business): string {
   const faqs = business.faqs.map((faq) => `Q: ${faq.q}\nA: ${faq.a}`).join('\n')
