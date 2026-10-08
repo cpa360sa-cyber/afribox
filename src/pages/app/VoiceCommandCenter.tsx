@@ -85,7 +85,7 @@ export default function VoiceCommandCenter() {
   }
 
   return (
-    <AppShell title="Voice Command Center">
+    <AppShell title="Voice Commander">
       <div className="mb-6">
         <h2 className="font-display text-xl font-bold text-textdark">Control AfriBox with your voice</h2>
         <p className="text-sm text-midgray">Say a command below to jump straight to that part of your dashboard.</p>

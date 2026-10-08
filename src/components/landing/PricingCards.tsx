@@ -18,18 +18,19 @@ export function PricingCards() {
           )}
         >
           {plan.highlight && (
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gold px-4 py-1 text-xs font-bold text-navy">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gold px-4 py-1 text-xs font-bold uppercase tracking-wide text-navy">
               Most Popular
             </span>
           )}
           <h3 className={cn('font-display text-xl font-bold', plan.highlight ? 'text-white' : 'text-textdark')}>
             {plan.name}
           </h3>
+          <p className={cn('mt-1 text-sm', plan.highlight ? 'text-white/60' : 'text-midgray')}>{plan.tagline}</p>
           <div className="mt-4 mb-6">
             {plan.priceZAR !== null ? (
               <>
                 <span className="font-display text-4xl font-extrabold">{formatZAR(plan.priceZAR)}</span>
-                <span className={cn('text-sm', plan.highlight ? 'text-white/60' : 'text-midgray')}>/month</span>
+                <span className={cn('text-sm', plan.highlight ? 'text-white/60' : 'text-midgray')}>/month excl. VAT</span>
               </>
             ) : (
               <span className="font-display text-4xl font-extrabold">Custom</span>

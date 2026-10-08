@@ -34,7 +34,7 @@ export interface Business {
 
 export type AgentTone = 'formal' | 'friendly' | 'casual'
 export type AgentLanguage = 'English' | 'Zulu' | 'Sotho' | 'Afrikaans'
-export type AgentType = 'salesbot' | 'adminbot' | 'brandbot'
+export type AgentType = 'adminbot' | 'salesbot' | 'financebot' | 'supportbot' | 'brandbot' | 'hrbot'
 export type AgentStatus = 'active' | 'paused'
 
 export interface AgentConfig {
@@ -93,6 +93,7 @@ export interface Lead {
 export interface Plan {
   id: string
   name: string
+  tagline: string
   priceZAR: number | null
   agentLimit: number | 'unlimited'
   conversationLimit: number | 'unlimited'
@@ -120,7 +121,7 @@ export interface AgentTemplate {
 }
 
 export type BookingStatus = 'pending' | 'confirmed' | 'completed' | 'cancelled'
-export type PaymentProvider = 'paystack' | 'yoco' | 'snapscan'
+export type PaymentProvider = 'stripe' | 'paystack' | 'yoco' | 'snapscan'
 export type PaymentStatus = 'unpaid' | 'paid' | 'refunded'
 
 export interface Booking {
@@ -160,5 +161,61 @@ export interface ScanReport {
   inputs: { website?: string; facebook?: string; instagram?: string }
   score: number | null
   findings: ScanFinding[]
+  createdAt: number
+}
+
+export type DealStage = 'new' | 'contacted' | 'qualified' | 'won' | 'lost'
+
+export interface Deal {
+  id: string
+  businessId: string
+  leadId: string | null
+  title: string
+  customerName: string
+  valueZAR: number | null
+  stage: DealStage
+  notes: string
+  createdAt: number
+  updatedAt: number
+}
+
+export interface KnowledgeArticle {
+  id: string
+  businessId: string
+  title: string
+  content: string
+  createdAt: number
+  updatedAt: number
+}
+
+export type AutomationStatus = 'active' | 'paused'
+
+export interface AutomationTemplate {
+  id: string
+  name: string
+  description: string
+  icon: string
+}
+
+export interface Automation {
+  id: string
+  businessId: string
+  templateId: string
+  name: string
+  status: AutomationStatus
+  runCount: number
+  lastRunAt: number | null
+  createdAt: number
+}
+
+export type TeamMemberStatus = 'active' | 'invited' | 'inactive'
+
+export interface TeamMember {
+  id: string
+  businessId: string
+  name: string
+  role: string
+  email: string
+  status: TeamMemberStatus
   createdAt: number
 }

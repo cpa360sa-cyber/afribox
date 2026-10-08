@@ -40,7 +40,7 @@ export default function Contact() {
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="mt-0.5 text-emerald" size={20} />
-                <p className="text-midgray">hello@afribox.co.za</p>
+                <p className="text-midgray">sales@afribox.ai</p>
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="mt-0.5 text-emerald" size={20} />

@@ -5,7 +5,7 @@ import { Logo } from './Logo'
 import { useAuth } from '../../hooks/useAuth'
 
 const links = [
-  { to: '/#features', label: 'Features' },
+  { to: '/#solution', label: 'Solution' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },

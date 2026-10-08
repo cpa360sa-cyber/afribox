@@ -1,4 +1,17 @@
-import type { Agent, AppUser, Booking, BrandAsset, Business, Conversation, Lead, ScanReport } from '../types'
+import type {
+  Agent,
+  AppUser,
+  Automation,
+  Booking,
+  BrandAsset,
+  Business,
+  Conversation,
+  Deal,
+  KnowledgeArticle,
+  Lead,
+  ScanReport,
+  TeamMember,
+} from '../types'
 
 export function rowToAppUser(row: any): AppUser {
   return {
@@ -106,6 +119,57 @@ export function rowToScanReport(row: any): ScanReport {
     inputs: row.inputs ?? {},
     score: row.score,
     findings: row.findings ?? [],
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToDeal(row: any): Deal {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    leadId: row.lead_id,
+    title: row.title,
+    customerName: row.customer_name ?? '',
+    valueZAR: row.value_zar,
+    stage: row.stage,
+    notes: row.notes ?? '',
+    createdAt: new Date(row.created_at).getTime(),
+    updatedAt: new Date(row.updated_at).getTime(),
+  }
+}
+
+export function rowToKnowledgeArticle(row: any): KnowledgeArticle {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    title: row.title,
+    content: row.content,
+    createdAt: new Date(row.created_at).getTime(),
+    updatedAt: new Date(row.updated_at).getTime(),
+  }
+}
+
+export function rowToAutomation(row: any): Automation {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    templateId: row.template_id,
+    name: row.name,
+    status: row.status,
+    runCount: row.run_count,
+    lastRunAt: row.last_run_at ? new Date(row.last_run_at).getTime() : null,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToTeamMember(row: any): TeamMember {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    name: row.name,
+    role: row.role ?? '',
+    email: row.email ?? '',
+    status: row.status,
     createdAt: new Date(row.created_at).getTime(),
   }
 }

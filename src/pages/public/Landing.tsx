@@ -1,13 +1,12 @@
 import { PageWrapper } from '../../components/layout/PageWrapper'
 import { Hero } from '../../components/landing/Hero'
 import { ProblemBar } from '../../components/landing/ProblemBar'
+import { Opportunity } from '../../components/landing/Opportunity'
 import { SolutionOverview } from '../../components/landing/SolutionOverview'
-import { Features } from '../../components/landing/Features'
-import { BuiltForSA } from '../../components/landing/BuiltForSA'
-import { Stats } from '../../components/landing/Stats'
+import { ProductDemo } from '../../components/landing/ProductDemo'
+import { ProductEcosystem } from '../../components/landing/ProductEcosystem'
 import { PricingSection } from '../../components/landing/PricingSection'
-import { HowItWorks } from '../../components/landing/HowItWorks'
-import { CommunityGiveback } from '../../components/landing/CommunityGiveback'
+import { GettingStarted } from '../../components/landing/GettingStarted'
 import { CtaBanner } from '../../components/landing/CtaBanner'
 
 export default function Landing() {
@@ -15,13 +14,12 @@ export default function Landing() {
     <PageWrapper>
       <Hero />
       <ProblemBar />
+      <Opportunity />
       <SolutionOverview />
-      <Features />
-      <BuiltForSA />
-      <Stats />
+      <ProductDemo />
+      <ProductEcosystem />
       <PricingSection />
-      <HowItWorks />
-      <CommunityGiveback />
+      <GettingStarted />
       <CtaBanner />
     </PageWrapper>
   )

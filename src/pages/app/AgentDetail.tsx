@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, CalendarClock, Palette } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CalendarClock, Palette, Receipt, Users } from 'lucide-react'
 import { AppShell } from '../../components/layout/AppShell'
 import { ConversationWindow } from '../../components/agents/ConversationWindow'
 import { LeadForm } from '../../components/agents/LeadForm'
@@ -62,7 +62,7 @@ export default function AgentDetail() {
           <AgentConfig agent={agent} onSave={(config) => updateAgentConfig(agent.id, config)} />
         </Card>
 
-        {agent.type === 'salesbot' && (
+        {(agent.type === 'salesbot' || agent.type === 'supportbot') && (
           <div>
             <h3 className="mb-3 font-display text-lg font-bold text-textdark">Test Conversation</h3>
             <ConversationWindow
@@ -70,23 +70,33 @@ export default function AgentDetail() {
               business={business}
               onConversationEnd={(messages) => createConversation(agent.id, business.id, messages)}
             />
-            <Card className="mt-4">
-              <CardHeader>
-                <CardTitle>Manual Lead Entry</CardTitle>
-              </CardHeader>
-              <LeadForm
-                onSubmit={(data) =>
-                  createLead({
-                    agentId: agent.id,
-                    businessId: business.id,
-                    name: data.name,
-                    phone: data.phone,
-                    email: data.email,
-                    queryType: data.queryType,
-                  })
-                }
-              />
-            </Card>
+            {agent.type === 'salesbot' ? (
+              <Card className="mt-4">
+                <CardHeader>
+                  <CardTitle>Manual Lead Entry</CardTitle>
+                </CardHeader>
+                <LeadForm
+                  onSubmit={(data) =>
+                    createLead({
+                      agentId: agent.id,
+                      businessId: business.id,
+                      name: data.name,
+                      phone: data.phone,
+                      email: data.email,
+                      queryType: data.queryType,
+                    })
+                  }
+                />
+              </Card>
+            ) : (
+              <p className="mt-4 text-sm text-midgray">
+                {agent.name} answers from your{' '}
+                <Link to="/app/knowledge-base" className="font-semibold text-emerald hover:underline">
+                  Knowledge Base
+                </Link>
+                . Add FAQs and articles there to improve its answers.
+              </p>
+            )}
           </div>
         )}
 
@@ -104,6 +114,20 @@ export default function AgentDetail() {
           </Card>
         )}
 
+        {agent.type === 'financebot' && (
+          <Card className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+            <Receipt className="text-emerald" size={36} />
+            <p className="font-semibold text-textdark">FinanceBot handles invoices and cashflow</p>
+            <p className="max-w-xs text-sm text-midgray">
+              Track invoices, payments, and expenses on the Bookings & Payments page.
+            </p>
+            <Link to="/app/bookings" className="btn-primary mt-1 text-sm">
+              Go to Bookings & Payments
+              <ArrowRight size={14} />
+            </Link>
+          </Card>
+        )}
+
         {agent.type === 'brandbot' && (
           <Card className="flex flex-col items-center justify-center gap-3 py-12 text-center">
             <Palette className="text-emerald" size={36} />
@@ -113,6 +137,20 @@ export default function AgentDetail() {
             </p>
             <Link to="/app/brandbox" className="btn-primary mt-1 text-sm">
               Open BrandBox
+              <ArrowRight size={14} />
+            </Link>
+          </Card>
+        )}
+
+        {agent.type === 'hrbot' && (
+          <Card className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+            <Users className="text-emerald" size={36} />
+            <p className="font-semibold text-textdark">HRBot supports recruitment and onboarding</p>
+            <p className="max-w-xs text-sm text-midgray">
+              Manage your team, roles, and invitations on the Team page.
+            </p>
+            <Link to="/app/team" className="btn-primary mt-1 text-sm">
+              Go to Team
               <ArrowRight size={14} />
             </Link>
           </Card>

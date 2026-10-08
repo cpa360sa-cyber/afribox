@@ -91,6 +91,37 @@ export function AgentConfig({ agent, onSave }: Props) {
         </>
       )}
 
+      {agent.type === 'financebot' && (
+        <>
+          <Input
+            label="Payment reminder lead time (days before due)"
+            type="number"
+            min={1}
+            placeholder="3"
+            value={config.reminderLeadTimeHours ? config.reminderLeadTimeHours / 24 : ''}
+            onChange={(e) => setConfig({ ...config, reminderLeadTimeHours: Number(e.target.value) * 24 })}
+          />
+          <p className="text-sm text-midgray">
+            {agent.name} generates invoices and estimates, tracks expenses, and reports on cashflow — manage
+            invoices and payments on the{' '}
+            <a href="/app/bookings" className="font-semibold text-emerald hover:underline">
+              Bookings & Payments
+            </a>{' '}
+            page.
+          </p>
+        </>
+      )}
+
+      {agent.type === 'supportbot' && (
+        <p className="text-sm text-midgray">
+          {agent.name} answers FAQs and handles support conversations using articles from your{' '}
+          <a href="/app/knowledge-base" className="font-semibold text-emerald hover:underline">
+            Knowledge Base
+          </a>
+          . Add articles there to teach {agent.name} about your business.
+        </p>
+      )}
+
       {agent.type === 'brandbot' && (
         <p className="text-sm text-midgray">
           {agent.name} keeps your branding consistent using assets generated in{' '}
@@ -98,6 +129,16 @@ export function AgentConfig({ agent, onSave }: Props) {
             BrandBox
           </a>
           . Generate a logo, bio, or slogan there and {agent.name} will keep your profile aligned with it.
+        </p>
+      )}
+
+      {agent.type === 'hrbot' && (
+        <p className="text-sm text-midgray">
+          {agent.name} helps with recruitment, interview scheduling, and onboarding — manage your people on the{' '}
+          <a href="/app/team" className="font-semibold text-emerald hover:underline">
+            Team
+          </a>{' '}
+          page.
         </p>
       )}
 

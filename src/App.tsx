@@ -25,6 +25,10 @@ import BrandBox from './pages/app/BrandBox'
 import AiScan from './pages/app/AiScan'
 import Bookings from './pages/app/Bookings'
 import VoiceCommandCenter from './pages/app/VoiceCommandCenter'
+import CRM from './pages/app/CRM'
+import KnowledgeBase from './pages/app/KnowledgeBase'
+import Automations from './pages/app/Automations'
+import Team from './pages/app/Team'
 
 import AdminOverview from './pages/admin/AdminOverview'
 import ClientList from './pages/admin/ClientList'
@@ -169,6 +173,46 @@ export default function App() {
                 <ProtectedRoute>
                   <RequireOnboarding>
                     <VoiceCommandCenter />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/crm"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <CRM />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/knowledge-base"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <KnowledgeBase />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/automations"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <Automations />
+                  </RequireOnboarding>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/app/team"
+              element={
+                <ProtectedRoute>
+                  <RequireOnboarding>
+                    <Team />
                   </RequireOnboarding>
                 </ProtectedRoute>
               }
