@@ -25,16 +25,26 @@ export function Hero() {
             AfriBox helps startups and SMEs automate, grow and scale — AI Employees that work 24/7, so you don't
             have to.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link to="/register" className="btn-primary w-full sm:w-auto">
-              Get Started Free
-              <ArrowRight size={18} />
-            </Link>
-            <a href="#solution" className="btn-orange w-full sm:w-auto">
-              <PlayCircle size={18} />
-              See How It Works
-            </a>
+          <div className="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:items-start sm:gap-8">
+            <div className="flex w-full flex-col items-center gap-2 sm:w-auto">
+              <Link to="/register" className="btn-primary w-full sm:w-auto">
+                Get Started Free
+                <ArrowRight size={18} />
+              </Link>
+              <span className="text-xs text-midgray">No credit card required</span>
+            </div>
+            <div className="flex w-full flex-col items-center gap-2 sm:w-auto">
+              <a href="#solution" className="btn-orange w-full sm:w-auto">
+                <PlayCircle size={18} />
+                See How It Works
+              </a>
+              <span className="text-xs text-midgray">2-minute walkthrough</span>
+            </div>
           </div>
+
+          <p className="mt-8 text-sm font-semibold text-midgray">
+            Trusted by <span className="text-emerald-dark">14+ businesses</span> automating with AfriBox today
+          </p>
         </div>
 
         <div className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">

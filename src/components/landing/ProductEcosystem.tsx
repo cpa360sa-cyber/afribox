@@ -1,4 +1,5 @@
-import { Smartphone, MessageSquare, Mic, Sparkles, Bot, ScanSearch, Palette, BookOpen, Briefcase, BarChart3, CreditCard, CalendarClock, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Smartphone, MessageSquare, Mic, Sparkles, Bot, ScanSearch, Palette, BookOpen, Briefcase, BarChart3, CreditCard, CalendarClock, Zap, ArrowRight } from 'lucide-react'
 
 const pillars = [
   { icon: Smartphone, title: 'Mobile-First', copy: 'Powerful on any device, anywhere.' },
@@ -80,13 +81,20 @@ export function ProductEcosystem() {
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {modules.map((m) => (
-            <div key={m.title} className="rounded-2xl border border-black/5 bg-offwhite p-5 transition hover:border-orange/30 hover:shadow-soft">
+            <Link
+              key={m.title}
+              to="/register"
+              className="group rounded-2xl border border-black/5 bg-offwhite p-5 transition hover:-translate-y-0.5 hover:border-orange/30 hover:shadow-soft"
+            >
               <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-orange/10 text-orange">
                 <m.icon size={18} />
               </div>
               <h4 className="font-display text-sm font-bold text-textdark">{m.title}</h4>
               <p className="mt-1.5 text-xs text-midgray">{m.copy}</p>
-            </div>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-orange opacity-0 transition group-hover:opacity-100">
+                Explore <ArrowRight size={12} />
+              </span>
+            </Link>
           ))}
         </div>
       </div>
