@@ -82,9 +82,9 @@ export function AgentConfig({ agent, onSave }: Props) {
             onChange={(e) => setConfig({ ...config, webhookUrl: e.target.value })}
           />
           <p className="text-sm text-midgray">
-            {agent.name} tracks bookings, sends reminders, and follows up on invoices — manage bookings on the{' '}
-            <a href="/app/bookings" className="font-semibold text-emerald hover:underline">
-              Bookings
+            {agent.name} tracks bookings, sends reminders, and follows up on invoices — manage your schedule on the{' '}
+            <a href="/app/calendar" className="font-semibold text-emerald hover:underline">
+              Calendar
             </a>{' '}
             page.
           </p>
@@ -104,8 +104,8 @@ export function AgentConfig({ agent, onSave }: Props) {
           <p className="text-sm text-midgray">
             {agent.name} generates invoices and estimates, tracks expenses, and reports on cashflow — manage
             invoices and payments on the{' '}
-            <a href="/app/bookings" className="font-semibold text-emerald hover:underline">
-              Bookings & Payments
+            <a href="/app/finance" className="font-semibold text-emerald hover:underline">
+              Finance
             </a>{' '}
             page.
           </p>
@@ -115,8 +115,8 @@ export function AgentConfig({ agent, onSave }: Props) {
       {agent.type === 'supportbot' && (
         <p className="text-sm text-midgray">
           {agent.name} answers FAQs and handles support conversations using articles from your{' '}
-          <a href="/app/knowledge-base" className="font-semibold text-emerald hover:underline">
-            Knowledge Base
+          <a href="/app/ai-memory" className="font-semibold text-emerald hover:underline">
+            AI Memory
           </a>
           . Add articles there to teach {agent.name} about your business.
         </p>
@@ -135,8 +135,8 @@ export function AgentConfig({ agent, onSave }: Props) {
       {agent.type === 'hrbot' && (
         <p className="text-sm text-midgray">
           {agent.name} helps with recruitment, interview scheduling, and onboarding — manage your people on the{' '}
-          <a href="/app/team" className="font-semibold text-emerald hover:underline">
-            Team
+          <a href="/app/hr" className="font-semibold text-emerald hover:underline">
+            HR
           </a>{' '}
           page.
         </p>

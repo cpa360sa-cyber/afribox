@@ -10,7 +10,7 @@ import { useKnowledgeBase } from '../../hooks/useKnowledgeBase'
 import { formatRelativeTime } from '../../lib/utils'
 import type { KnowledgeArticle } from '../../types'
 
-export default function KnowledgeBase() {
+export default function AiMemory() {
   const { business } = useBusiness()
   const { articles, loading, createArticle, updateArticle, deleteArticle } = useKnowledgeBase(business?.id)
   const [modalOpen, setModalOpen] = useState(false)
@@ -46,7 +46,7 @@ export default function KnowledgeBase() {
   }
 
   return (
-    <AppShell title="Knowledge Base">
+    <AppShell title="AI Memory" subtitle="Store, organize and access your business knowledge.">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h2 className="font-display text-xl font-bold text-textdark">Business Knowledge</h2>

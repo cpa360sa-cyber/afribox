@@ -1,34 +1,52 @@
 import { useState } from 'react'
-import { MessageSquare, Inbox as InboxIcon } from 'lucide-react'
+import { MessageCircle, Send } from 'lucide-react'
 import { AppShell } from '../../components/layout/AppShell'
 import { Badge } from '../../components/ui/Badge'
+import { StatsCard } from '../../components/dashboard/StatsCard'
 import { useBusiness } from '../../hooks/useBusiness'
-import { useConversations } from '../../hooks/useConversations'
 import { useAgents } from '../../hooks/useAgents'
-import { formatRelativeTime } from '../../lib/utils'
-import { cn } from '../../lib/utils'
+import { useConversations } from '../../hooks/useConversations'
+import { formatRelativeTime, cn } from '../../lib/utils'
 import type { Conversation } from '../../types'
 
-export default function Inbox() {
+export default function WhatsAppCenter() {
   const { business } = useBusiness()
-  const { conversations, loading } = useConversations(business?.id)
   const { agents } = useAgents(business?.id)
+  const { conversations, loading } = useConversations(business?.id)
   const [selected, setSelected] = useState<Conversation | null>(null)
+
+  const whatsappAgent = agents.find((a) => a.type === 'salesbot' || a.type === 'supportbot')
 
   function agentName(agentId: string) {
     return agents.find((a) => a.id === agentId)?.name ?? 'Agent'
   }
 
+  const totalMessages = conversations.reduce((sum, c) => sum + c.messages.length, 0)
+  const open = conversations.filter((c) => c.status === 'open').length
+
   return (
-    <AppShell title="Inbox">
+    <AppShell title="WhatsApp Center" subtitle="Manage conversations, automate replies and engage your customers on WhatsApp.">
+      <div className="mb-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <StatsCard label="Total Conversations" value={conversations.length} icon={MessageCircle} tone="emerald" />
+        <StatsCard label="Messages Exchanged" value={totalMessages} icon={Send} tone="teal" />
+        <StatsCard label="Open Conversations" value={open} icon={MessageCircle} tone="gold" />
+        <StatsCard
+          label="WhatsApp Number"
+          value={whatsappAgent?.config.whatsappNumber || 'Not connected'}
+          icon={MessageCircle}
+          tone="navy"
+        />
+      </div>
+
       {loading ? (
         <div className="h-96 animate-pulse rounded-2xl bg-black/5" />
       ) : conversations.length === 0 ? (
         <div className="card-surface flex flex-col items-center gap-3 py-16 text-center">
-          <InboxIcon className="text-emerald" size={40} />
+          <MessageCircle className="text-emerald" size={40} />
           <p className="font-semibold text-textdark">No conversations yet</p>
           <p className="max-w-sm text-sm text-midgray">
-            Once customers start chatting with your agents, conversations will appear here.
+            Once customers start chatting with SalesBot or SupportBot on WhatsApp, conversations will appear here.
+            Configure your WhatsApp number from an agent's settings in AI Employees.
           </p>
         </div>
       ) : (
@@ -47,7 +65,7 @@ export default function Inbox() {
                       )}
                     >
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald/10 text-emerald">
-                        <MessageSquare size={16} />
+                        <MessageCircle size={16} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-2">

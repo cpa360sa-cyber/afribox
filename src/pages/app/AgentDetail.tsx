@@ -91,8 +91,8 @@ export default function AgentDetail() {
             ) : (
               <p className="mt-4 text-sm text-midgray">
                 {agent.name} answers from your{' '}
-                <Link to="/app/knowledge-base" className="font-semibold text-emerald hover:underline">
-                  Knowledge Base
+                <Link to="/app/ai-memory" className="font-semibold text-emerald hover:underline">
+                  AI Memory
                 </Link>
                 . Add FAQs and articles there to improve its answers.
               </p>
@@ -105,10 +105,10 @@ export default function AgentDetail() {
             <CalendarClock className="text-emerald" size={36} />
             <p className="font-semibold text-textdark">AdminBot manages bookings and reminders</p>
             <p className="max-w-xs text-sm text-midgray">
-              See and manage everything this agent is tracking on the Bookings page.
+              See and manage everything this agent is tracking on the Calendar page.
             </p>
-            <Link to="/app/bookings" className="btn-primary mt-1 text-sm">
-              Go to Bookings
+            <Link to="/app/calendar" className="btn-primary mt-1 text-sm">
+              Go to Calendar
               <ArrowRight size={14} />
             </Link>
           </Card>
@@ -119,10 +119,10 @@ export default function AgentDetail() {
             <Receipt className="text-emerald" size={36} />
             <p className="font-semibold text-textdark">FinanceBot handles invoices and cashflow</p>
             <p className="max-w-xs text-sm text-midgray">
-              Track invoices, payments, and expenses on the Bookings & Payments page.
+              Track invoices, payments, and expenses on the Finance page.
             </p>
-            <Link to="/app/bookings" className="btn-primary mt-1 text-sm">
-              Go to Bookings & Payments
+            <Link to="/app/finance" className="btn-primary mt-1 text-sm">
+              Go to Finance
               <ArrowRight size={14} />
             </Link>
           </Card>
@@ -147,10 +147,10 @@ export default function AgentDetail() {
             <Users className="text-emerald" size={36} />
             <p className="font-semibold text-textdark">HRBot supports recruitment and onboarding</p>
             <p className="max-w-xs text-sm text-midgray">
-              Manage your team, roles, and invitations on the Team page.
+              Manage your team, roles, and invitations on the HR page.
             </p>
-            <Link to="/app/team" className="btn-primary mt-1 text-sm">
-              Go to Team
+            <Link to="/app/hr" className="btn-primary mt-1 text-sm">
+              Go to HR
               <ArrowRight size={14} />
             </Link>
           </Card>

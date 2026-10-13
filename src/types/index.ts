@@ -219,3 +219,89 @@ export interface TeamMember {
   status: TeamMemberStatus
   createdAt: number
 }
+
+export type TaskPriority = 'low' | 'medium' | 'high'
+export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'completed' | 'overdue'
+
+export interface Task {
+  id: string
+  businessId: string
+  title: string
+  description: string
+  project: string
+  assignee: string
+  priority: TaskPriority
+  status: TaskStatus
+  dueDate: number | null
+  createdAt: number
+}
+
+export interface CalendarEvent {
+  id: string
+  businessId: string
+  title: string
+  startsAt: number
+  endsAt: number | null
+  allDay: boolean
+  location: string
+  createdAt: number
+}
+
+export type LeaveType = 'annual' | 'sick' | 'personal' | 'unpaid'
+export type LeaveStatus = 'pending' | 'approved' | 'declined'
+
+export interface LeaveRequest {
+  id: string
+  businessId: string
+  teamMemberId: string | null
+  memberName: string
+  leaveType: LeaveType
+  startsOn: string
+  endsOn: string
+  status: LeaveStatus
+  createdAt: number
+}
+
+export type InvoiceStatus = 'draft' | 'sent' | 'paid' | 'overdue'
+
+export interface Invoice {
+  id: string
+  businessId: string
+  customerName: string
+  description: string
+  amountZAR: number
+  status: InvoiceStatus
+  dueDate: string | null
+  createdAt: number
+}
+
+export type CampaignChannel = 'social' | 'email' | 'whatsapp' | 'ads' | 'landing_page'
+export type CampaignStatus = 'draft' | 'active' | 'paused' | 'completed'
+
+export interface Campaign {
+  id: string
+  businessId: string
+  name: string
+  channel: CampaignChannel
+  status: CampaignStatus
+  budgetZAR: number | null
+  createdAt: number
+}
+
+export interface BizDocument {
+  id: string
+  businessId: string
+  name: string
+  category: string
+  url: string
+  createdAt: number
+}
+
+export interface Notification {
+  id: string
+  businessId: string
+  title: string
+  body: string
+  read: boolean
+  createdAt: number
+}

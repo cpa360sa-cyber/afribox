@@ -2,14 +2,21 @@ import type {
   Agent,
   AppUser,
   Automation,
+  BizDocument,
   Booking,
   BrandAsset,
   Business,
+  CalendarEvent,
+  Campaign,
   Conversation,
   Deal,
+  Invoice,
   KnowledgeArticle,
   Lead,
+  LeaveRequest,
+  Notification,
   ScanReport,
+  Task,
   TeamMember,
 } from '../types'
 
@@ -170,6 +177,95 @@ export function rowToTeamMember(row: any): TeamMember {
     role: row.role ?? '',
     email: row.email ?? '',
     status: row.status,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToTask(row: any): Task {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    title: row.title,
+    description: row.description ?? '',
+    project: row.project ?? '',
+    assignee: row.assignee ?? '',
+    priority: row.priority,
+    status: row.status,
+    dueDate: row.due_date ? new Date(row.due_date).getTime() : null,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToCalendarEvent(row: any): CalendarEvent {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    title: row.title,
+    startsAt: new Date(row.starts_at).getTime(),
+    endsAt: row.ends_at ? new Date(row.ends_at).getTime() : null,
+    allDay: row.all_day,
+    location: row.location ?? '',
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToLeaveRequest(row: any): LeaveRequest {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    teamMemberId: row.team_member_id,
+    memberName: row.member_name,
+    leaveType: row.leave_type,
+    startsOn: row.starts_on,
+    endsOn: row.ends_on,
+    status: row.status,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToInvoice(row: any): Invoice {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    customerName: row.customer_name,
+    description: row.description ?? '',
+    amountZAR: row.amount_zar,
+    status: row.status,
+    dueDate: row.due_date,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToCampaign(row: any): Campaign {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    name: row.name,
+    channel: row.channel,
+    status: row.status,
+    budgetZAR: row.budget_zar,
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToDocument(row: any): BizDocument {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    name: row.name,
+    category: row.category ?? 'General',
+    url: row.url ?? '',
+    createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToNotification(row: any): Notification {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    title: row.title,
+    body: row.body ?? '',
+    read: row.read,
     createdAt: new Date(row.created_at).getTime(),
   }
 }

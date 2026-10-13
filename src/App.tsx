@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import type { ReactNode } from 'react'
 import { AuthProvider } from './context/AuthContext'
 import { BusinessProvider } from './context/BusinessContext'
 import { ProtectedRoute } from './components/layout/ProtectedRoute'
@@ -16,25 +17,66 @@ import Onboarding from './pages/app/Onboarding'
 import Dashboard from './pages/app/Dashboard'
 import Agents from './pages/app/Agents'
 import AgentDetail from './pages/app/AgentDetail'
-import Inbox from './pages/app/Inbox'
 import Analytics from './pages/app/Analytics'
-import Leads from './pages/app/Leads'
 import Billing from './pages/app/Billing'
 import Settings from './pages/app/Settings'
 import BrandBox from './pages/app/BrandBox'
 import AiScan from './pages/app/AiScan'
-import Bookings from './pages/app/Bookings'
 import VoiceCommandCenter from './pages/app/VoiceCommandCenter'
-import CRM from './pages/app/CRM'
-import KnowledgeBase from './pages/app/KnowledgeBase'
+import Sales from './pages/app/Sales'
+import AiMemory from './pages/app/AiMemory'
 import Automations from './pages/app/Automations'
-import Team from './pages/app/Team'
+import HR from './pages/app/HR'
+import WhatsAppCenter from './pages/app/WhatsAppCenter'
+import CalendarPage from './pages/app/CalendarPage'
+import Customers from './pages/app/Customers'
+import Marketing from './pages/app/Marketing'
+import Website from './pages/app/Website'
+import Tasks from './pages/app/Tasks'
+import Finance from './pages/app/Finance'
+import Documents from './pages/app/Documents'
+import Integrations from './pages/app/Integrations'
+import HelpCenter from './pages/app/HelpCenter'
 
 import AdminOverview from './pages/admin/AdminOverview'
 import ClientList from './pages/admin/ClientList'
 import ClientDetail from './pages/admin/ClientDetail'
 import AdminAnalytics from './pages/admin/AdminAnalytics'
 import AdminSettings from './pages/admin/AdminSettings'
+
+function AppPage({ children }: { children: ReactNode }) {
+  return (
+    <ProtectedRoute>
+      <RequireOnboarding>{children}</RequireOnboarding>
+    </ProtectedRoute>
+  )
+}
+
+const appRoutes: { path: string; element: ReactNode }[] = [
+  { path: '/app/dashboard', element: <Dashboard /> },
+  { path: '/app/agents', element: <Agents /> },
+  { path: '/app/agents/:id', element: <AgentDetail /> },
+  { path: '/app/voice', element: <VoiceCommandCenter /> },
+  { path: '/app/ai-memory', element: <AiMemory /> },
+  { path: '/app/aiscan', element: <AiScan /> },
+  { path: '/app/brandbox', element: <BrandBox /> },
+  { path: '/app/whatsapp', element: <WhatsAppCenter /> },
+  { path: '/app/calendar', element: <CalendarPage /> },
+  { path: '/app/customers', element: <Customers /> },
+  { path: '/app/sales', element: <Sales /> },
+  { path: '/app/marketing', element: <Marketing /> },
+  { path: '/app/website', element: <Website /> },
+  { path: '/app/automations', element: <Automations /> },
+  { path: '/app/tasks', element: <Tasks /> },
+  { path: '/app/hr', element: <HR /> },
+  { path: '/app/finance', element: <Finance /> },
+  { path: '/app/documents', element: <Documents /> },
+  { path: '/app/analytics', element: <Analytics /> },
+  { path: '/app/integrations', element: <Integrations /> },
+  { path: '/app/billing', element: <Billing /> },
+  { path: '/app/settings', element: <Settings /> },
+  { path: '/app/help', element: <HelpCenter /> },
+]
 
 export default function App() {
   return (
@@ -57,166 +99,10 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/app/dashboard"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Dashboard />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/agents"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Agents />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/agents/:id"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <AgentDetail />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/inbox"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Inbox />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/analytics"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Analytics />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/leads"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Leads />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/billing"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Billing />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/settings"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Settings />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/brandbox"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <BrandBox />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/aiscan"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <AiScan />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/bookings"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Bookings />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/voice"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <VoiceCommandCenter />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/crm"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <CRM />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/knowledge-base"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <KnowledgeBase />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/automations"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Automations />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/app/team"
-              element={
-                <ProtectedRoute>
-                  <RequireOnboarding>
-                    <Team />
-                  </RequireOnboarding>
-                </ProtectedRoute>
-              }
-            />
+
+            {appRoutes.map((route) => (
+              <Route key={route.path} path={route.path} element={<AppPage>{route.element}</AppPage>} />
+            ))}
 
             <Route
               path="/admin"

@@ -2,20 +2,27 @@ import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard,
   Bot,
-  Inbox,
+  Mic,
+  Brain,
+  ScanSearch,
+  Palette,
+  MessageCircle,
+  CalendarDays,
+  Users2,
+  Briefcase,
+  Megaphone,
+  Globe,
+  Zap,
+  ClipboardList,
+  Users,
+  Wallet,
+  FileText,
   BarChart3,
-  Target,
+  Plug,
   CreditCard,
   Settings,
+  HelpCircle,
   ShieldCheck,
-  Palette,
-  ScanSearch,
-  CalendarClock,
-  Mic,
-  Briefcase,
-  BookOpen,
-  Zap,
-  Users,
 } from 'lucide-react'
 import { Logo } from './Logo'
 import { useAuth } from '../../hooks/useAuth'
@@ -23,38 +30,53 @@ import { cn } from '../../lib/utils'
 
 const groups = [
   {
-    label: 'Overview',
+    label: null,
+    links: [{ to: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard, end: true }],
+  },
+  {
+    label: 'AI Command Center',
     links: [
-      { to: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard, end: true },
-      { to: '/app/agents', label: 'AI Employee Hub', icon: Bot },
+      { to: '/app/agents', label: 'AI Employees', icon: Bot },
+      { to: '/app/voice', label: 'Voice Commander', icon: Mic },
+      { to: '/app/ai-memory', label: 'AI Memory', icon: Brain },
+      { to: '/app/aiscan', label: 'AiScan (Brand Scan)', icon: ScanSearch },
+      { to: '/app/brandbox', label: 'BrandBox', icon: Palette },
+      { to: '/app/whatsapp', label: 'WhatsApp Center', icon: MessageCircle },
+      { to: '/app/calendar', label: 'Calendar', icon: CalendarDays },
     ],
   },
   {
-    label: 'Core Modules',
+    label: 'Business',
     links: [
-      { to: '/app/voice', label: 'Voice Commander', icon: Mic },
-      { to: '/app/brandbox', label: 'BrandBox', icon: Palette },
-      { to: '/app/aiscan', label: 'AiScan', icon: ScanSearch },
-      { to: '/app/knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-      { to: '/app/crm', label: 'CRM', icon: Briefcase },
-      { to: '/app/bookings', label: 'Bookings & Payments', icon: CalendarClock },
-      { to: '/app/automations', label: 'Automations', icon: Zap },
+      { to: '/app/customers', label: 'Customers', icon: Users2 },
+      { to: '/app/sales', label: 'Sales', icon: Briefcase },
+      { to: '/app/marketing', label: 'Marketing', icon: Megaphone },
+      { to: '/app/website', label: 'Website', icon: Globe },
     ],
   },
   {
     label: 'Operations',
     links: [
-      { to: '/app/inbox', label: 'Inbox', icon: Inbox },
-      { to: '/app/leads', label: 'Leads', icon: Target },
-      { to: '/app/team', label: 'Team', icon: Users },
-      { to: '/app/analytics', label: 'Reporting', icon: BarChart3 },
+      { to: '/app/automations', label: 'Automations', icon: Zap },
+      { to: '/app/tasks', label: 'Tasks', icon: ClipboardList },
+      { to: '/app/hr', label: 'HR', icon: Users },
+      { to: '/app/finance', label: 'Finance', icon: Wallet },
+      { to: '/app/documents', label: 'Documents', icon: FileText },
     ],
   },
   {
-    label: 'Account',
+    label: 'Insights',
+    links: [
+      { to: '/app/analytics', label: 'Analytics', icon: BarChart3 },
+      { to: '/app/integrations', label: 'Integrations', icon: Plug },
+    ],
+  },
+  {
+    label: 'System',
     links: [
       { to: '/app/billing', label: 'Billing', icon: CreditCard },
       { to: '/app/settings', label: 'Settings', icon: Settings },
+      { to: '/app/help', label: 'Help Center', icon: HelpCircle },
     ],
   },
 ]
@@ -68,11 +90,13 @@ export function Sidebar() {
         <Logo />
       </div>
       <nav className="flex-1 space-y-5 p-4">
-        {groups.map((group) => (
-          <div key={group.label}>
-            <p className="mb-1.5 px-4 text-[0.68rem] font-bold uppercase tracking-widest text-midgray/70">
-              {group.label}
-            </p>
+        {groups.map((group, i) => (
+          <div key={group.label ?? `group-${i}`}>
+            {group.label && (
+              <p className="mb-1.5 px-4 text-[0.68rem] font-bold uppercase tracking-widest text-midgray/70">
+                {group.label}
+              </p>
+            )}
             <div className="space-y-1">
               {group.links.map((link) => (
                 <NavLink
@@ -86,8 +110,8 @@ export function Sidebar() {
                     )
                   }
                 >
-                  <link.icon size={18} />
-                  {link.label}
+                  <link.icon size={18} className="shrink-0" />
+                  <span className="truncate">{link.label}</span>
                 </NavLink>
               ))}
             </div>
@@ -108,6 +132,16 @@ export function Sidebar() {
           </NavLink>
         )}
       </nav>
+      <div className="m-4 rounded-2xl bg-navy p-4 text-white">
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-bold">{(appUser?.planId ?? 'starterbot').replace(/^./, (c) => c.toUpperCase())} Plan</p>
+          <span className="rounded-full bg-emerald/20 px-2 py-0.5 text-[10px] font-bold text-emerald-light">Active</span>
+        </div>
+        <p className="mt-1 text-xs text-white/50">Renews on 1st of next month</p>
+        <a href="/app/billing" className="mt-3 block rounded-xl bg-white/10 py-2 text-center text-xs font-semibold hover:bg-white/15">
+          Manage Plan
+        </a>
+      </div>
     </aside>
   )
 }

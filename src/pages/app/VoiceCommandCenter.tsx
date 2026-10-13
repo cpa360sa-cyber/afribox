@@ -14,9 +14,9 @@ interface VoiceCommand {
 const COMMANDS: VoiceCommand[] = [
   { phrases: ['dashboard', 'home'], label: '"Go to dashboard"', action: (nav) => nav('/app/dashboard') },
   { phrases: ['agents', 'bots'], label: '"Show my agents"', action: (nav) => nav('/app/agents') },
-  { phrases: ['leads'], label: '"Show leads"', action: (nav) => nav('/app/leads') },
-  { phrases: ['inbox', 'conversations', 'messages'], label: '"Open inbox"', action: (nav) => nav('/app/inbox') },
-  { phrases: ['bookings', 'appointments'], label: '"Open bookings"', action: (nav) => nav('/app/bookings') },
+  { phrases: ['leads', 'customers'], label: '"Show customers"', action: (nav) => nav('/app/customers') },
+  { phrases: ['inbox', 'conversations', 'messages', 'whatsapp'], label: '"Open WhatsApp Center"', action: (nav) => nav('/app/whatsapp') },
+  { phrases: ['bookings', 'appointments', 'calendar'], label: '"Open calendar"', action: (nav) => nav('/app/calendar') },
   { phrases: ['brandbox', 'brand'], label: '"Open BrandBox"', action: (nav) => nav('/app/brandbox') },
   { phrases: ['scan', 'aiscan', 'audit'], label: '"Run AiScan"', action: (nav) => nav('/app/aiscan') },
   { phrases: ['analytics', 'reports'], label: '"Show reports"', action: (nav) => nav('/app/analytics') },

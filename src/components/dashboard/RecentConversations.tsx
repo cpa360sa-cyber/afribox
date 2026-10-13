@@ -10,7 +10,7 @@ export function RecentConversations({ conversations }: { conversations: Conversa
     <Card>
       <CardHeader>
         <CardTitle>Recent Conversations</CardTitle>
-        <Link to="/app/inbox" className="text-sm font-semibold text-emerald hover:text-emerald-dark">
+        <Link to="/app/whatsapp" className="text-sm font-semibold text-emerald hover:text-emerald-dark">
           View all
         </Link>
       </CardHeader>

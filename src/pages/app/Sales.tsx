@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Plus, Briefcase } from 'lucide-react'
+import { Plus, Briefcase, DollarSign, Trophy, Target, TrendingUp } from 'lucide-react'
 import { AppShell } from '../../components/layout/AppShell'
 import { Modal } from '../../components/ui/Modal'
 import { Input } from '../../components/ui/Input'
 import { Button } from '../../components/ui/Button'
+import { StatsCard } from '../../components/dashboard/StatsCard'
 import { useBusiness } from '../../hooks/useBusiness'
 import { useDeals } from '../../hooks/useDeals'
 import { formatZAR, cn } from '../../lib/utils'
@@ -17,7 +18,7 @@ const STAGES: { id: DealStage; label: string }[] = [
   { id: 'lost', label: 'Lost' },
 ]
 
-export default function CRM() {
+export default function Sales() {
   const { business } = useBusiness()
   const { deals, loading, createDeal, updateDealStage } = useDeals(business?.id)
   const [modalOpen, setModalOpen] = useState(false)
@@ -46,26 +47,33 @@ export default function CRM() {
     return deals.filter((d) => d.stage === stage)
   }
 
-  const pipelineValue = deals.filter((d) => d.stage !== 'lost').reduce((sum, d) => sum + (d.valueZAR ?? 0), 0)
+  const openDeals = deals.filter((d) => d.stage !== 'won' && d.stage !== 'lost')
+  const wonDeals = deals.filter((d) => d.stage === 'won')
+  const totalRevenue = wonDeals.reduce((sum, d) => sum + (d.valueZAR ?? 0), 0)
+  const winRate = deals.length ? Math.round((wonDeals.length / deals.length) * 100) : 0
 
   return (
-    <AppShell title="CRM">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h2 className="font-display text-xl font-bold text-textdark">Pipeline</h2>
-          <p className="text-sm text-midgray">{deals.length} deals · {formatZAR(pipelineValue)} in active pipeline</p>
-        </div>
-        <Button onClick={() => setModalOpen(true)}>
-          <Plus size={16} />
-          New Deal
-        </Button>
+    <AppShell
+      title="Sales"
+      subtitle="Track your pipeline, close more deals and grow revenue."
+      primaryAction={{ label: 'New Deal', icon: <Plus size={16} />, onClick: () => setModalOpen(true) }}
+    >
+      <div className="mb-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <StatsCard label="Total Revenue (Won)" value={formatZAR(totalRevenue)} icon={DollarSign} tone="emerald" />
+        <StatsCard label="Open Deals" value={openDeals.length} icon={Briefcase} tone="teal" />
+        <StatsCard label="Won Deals" value={wonDeals.length} icon={Trophy} tone="gold" />
+        <StatsCard label="Win Rate" value={`${winRate}%`} icon={TrendingUp} tone="navy" />
+      </div>
+
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="font-display text-lg font-bold text-textdark">Pipeline</h2>
       </div>
 
       {loading ? (
         <div className="h-64 animate-pulse rounded-2xl bg-black/5" />
       ) : deals.length === 0 ? (
         <div className="card-surface flex flex-col items-center gap-3 py-16 text-center">
-          <Briefcase className="text-emerald" size={40} />
+          <Target className="text-emerald" size={40} />
           <p className="font-semibold text-textdark">No deals yet</p>
           <p className="max-w-sm text-sm text-midgray">
             Track leads, deals and customers through your pipeline — SalesBot feeds leads in here automatically.

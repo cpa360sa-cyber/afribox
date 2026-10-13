@@ -3,7 +3,7 @@ import { Bot, Target, BarChart3, Settings } from 'lucide-react'
 
 const actions = [
   { to: '/app/agents', label: 'Manage Agents', icon: Bot },
-  { to: '/app/leads', label: 'View Leads', icon: Target },
+  { to: '/app/customers', label: 'View Customers', icon: Target },
   { to: '/app/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/app/settings', label: 'Business Settings', icon: Settings },
 ]
