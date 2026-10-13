@@ -34,6 +34,7 @@ async function complete(system: string, userPrompt: string, maxTokens: number): 
     body: JSON.stringify({
       model: MODEL,
       max_tokens: maxTokens,
+      thinking: { type: 'disabled' },
       system,
       messages: [{ role: 'user', content: userPrompt }],
     }),
@@ -65,6 +66,7 @@ export async function sendChatMessage(
     body: JSON.stringify({
       model: MODEL,
       max_tokens: maxTokens,
+      thinking: { type: 'disabled' },
       system: buildSystemPrompt(agent, business),
       messages: history.map((m) => ({ role: m.role, content: m.content })),
     }),
@@ -127,7 +129,7 @@ ${links || 'None provided — base findings on having no verifiable online prese
 
 Audit this business's online presence for a South African small-business audience and return the JSON.`
 
-  const raw = await complete(AISCAN_SYSTEM, prompt, 800)
+  const raw = await complete(AISCAN_SYSTEM, prompt, 1500)
   const cleaned = raw.trim().replace(/^```json?\n?/, '').replace(/```$/, '')
   const parsed = JSON.parse(cleaned)
   return { score: parsed.score, findings: parsed.findings }
