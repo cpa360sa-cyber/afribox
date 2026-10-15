@@ -26,7 +26,7 @@ const initialProfile: BusinessProfileData = {
 }
 
 export default function Onboarding() {
-  const { appUser, authUser } = useAuth()
+  const { appUser, authUser, refreshAppUser } = useAuth()
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [profile, setProfile] = useState<BusinessProfileData>(initialProfile)
@@ -88,6 +88,7 @@ export default function Onboarding() {
         .eq('id', authUser.id)
       if (profileError) throw profileError
 
+      await refreshAppUser()
       navigate('/app/dashboard')
     } catch {
       setError('Something went wrong launching your AI employee. Please try again.')

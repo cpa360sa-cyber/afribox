@@ -12,6 +12,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>
   loginWithGoogle: () => Promise<void>
   logout: () => Promise<void>
+  refreshAppUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
@@ -112,8 +113,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut()
   }
 
+  async function refreshAppUser() {
+    if (!authUser) return
+    setAppUser(await fetchProfile(authUser.id))
+  }
+
   return (
-    <AuthContext.Provider value={{ authUser, appUser, loading, register, login, loginWithGoogle, logout }}>
+    <AuthContext.Provider
+      value={{ authUser, appUser, loading, register, login, loginWithGoogle, logout, refreshAppUser }}
+    >
       {children}
     </AuthContext.Provider>
   )

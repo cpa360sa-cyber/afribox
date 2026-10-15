@@ -305,3 +305,17 @@ export interface Notification {
   read: boolean
   createdAt: number
 }
+
+export type IntegrationProvider = 'whatsapp' | 'stripe' | 'paystack' | 'yoco'
+export type IntegrationStatus = 'connected' | 'disconnected' | 'failed'
+
+export interface Integration {
+  id: string
+  businessId: string
+  provider: IntegrationProvider
+  status: IntegrationStatus
+  credentials: Record<string, string>
+  lastCheckedAt: number | null
+  lastError: string | null
+  updatedAt: number
+}

@@ -6,14 +6,27 @@ import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
 import { Modal } from '../../components/ui/Modal'
 import { useAuth } from '../../hooks/useAuth'
+import { supabase } from '../../lib/supabase'
 import { PLANS, getPlan } from '../../constants/plans'
-import { formatZAR, formatDate, cn } from '../../lib/utils'
+import { formatZAR, cn } from '../../lib/utils'
 
 export default function Billing() {
-  const { appUser } = useAuth()
+  const { appUser, authUser, refreshAppUser } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
+  const [switching, setSwitching] = useState<string | null>(null)
   const plan = getPlan(appUser?.planId ?? 'starterbot')
-  const nextBillingDate = Date.now() + 30 * 24 * 60 * 60 * 1000
+
+  async function handleSwitchPlan(planId: string) {
+    if (!authUser) return
+    setSwitching(planId)
+    try {
+      await supabase.from('profiles').update({ plan_id: planId }).eq('id', authUser.id)
+      await refreshAppUser()
+      setModalOpen(false)
+    } finally {
+      setSwitching(null)
+    }
+  }
 
   return (
     <AppShell title="Billing">
@@ -38,15 +51,17 @@ export default function Billing() {
             <div className="flex items-center gap-3 rounded-lg border border-black/5 p-4">
               <CreditCard className="text-emerald" size={20} />
               <div>
-                <p className="text-xs text-midgray">Next billing date</p>
-                <p className="font-semibold text-textdark">{formatDate(nextBillingDate)}</p>
+                <p className="text-xs text-midgray">Billing status</p>
+                <p className="font-semibold text-textdark">No card on file — plan changes apply immediately</p>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-lg border border-black/5 p-4">
               <Check className="text-emerald" size={20} />
               <div>
                 <p className="text-xs text-midgray">Payment method</p>
-                <p className="font-semibold text-textdark">Paystack / Yoco / SnapScan — not yet connected</p>
+                <p className="font-semibold text-textdark">
+                  Connect Paystack or Yoco in <a href="/app/integrations" className="text-emerald hover:underline">Integrations</a>
+                </p>
               </div>
             </div>
           </div>
@@ -86,7 +101,9 @@ export default function Billing() {
                   Current Plan
                 </Badge>
               ) : p.priceZAR !== null ? (
-                <Button size="sm">Switch to {p.name}</Button>
+                <Button size="sm" onClick={() => handleSwitchPlan(p.id)} disabled={switching === p.id}>
+                  {switching === p.id ? 'Switching…' : `Switch to ${p.name}`}
+                </Button>
               ) : (
                 <a
                   href="/contact"

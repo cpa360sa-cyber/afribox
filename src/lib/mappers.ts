@@ -10,6 +10,7 @@ import type {
   Campaign,
   Conversation,
   Deal,
+  Integration,
   Invoice,
   KnowledgeArticle,
   Lead,
@@ -267,5 +268,18 @@ export function rowToNotification(row: any): Notification {
     body: row.body ?? '',
     read: row.read,
     createdAt: new Date(row.created_at).getTime(),
+  }
+}
+
+export function rowToIntegration(row: any): Integration {
+  return {
+    id: row.id,
+    businessId: row.business_id,
+    provider: row.provider,
+    status: row.status,
+    credentials: row.credentials ?? {},
+    lastCheckedAt: row.last_checked_at ? new Date(row.last_checked_at).getTime() : null,
+    lastError: row.last_error,
+    updatedAt: new Date(row.updated_at).getTime(),
   }
 }
